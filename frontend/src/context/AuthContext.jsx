@@ -8,12 +8,21 @@ export const AuthProvider = ({ children }) => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        // Attempt to login by checking if cookie works, or relying on localstorage
-        const savedUser = localStorage.getItem('user');
-        if (savedUser) {
-            setUser(JSON.parse(savedUser));
-        }
-        setLoading(false);
+        const verifySession = async () => {
+            const savedUser = localStorage.getItem('user');
+            if (savedUser) {
+                try {
+                    // Try to fetch current user to ensure cookie is still valid
+                    const { data } = await api.get('/auth/me');
+                    setUser(data.data);
+                } catch (error) {
+                    // If it fails (e.g. 401), the interceptor in api.js will handle clearing local storage and redirecting
+                    setUser(null);
+                }
+            }
+            setLoading(false);
+        };
+        verifySession();
     }, []);
 
     const login = async (email, password) => {
