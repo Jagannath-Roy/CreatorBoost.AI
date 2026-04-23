@@ -49,7 +49,7 @@ const Login = () => {
                                 type="email"
                                 required
                                 className="mt-1 appearance-none relative block w-full px-3 py-3 border border-gray-300 dark:border-slate-600 placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-white bg-white dark:bg-slate-700 rounded-lg focus:outline-none focus:ring-red-500 focus:border-red-500 focus:z-10 sm:text-sm transition-colors duration-200"
-                                placeholder="you@example.com"
+                                placeholder="Enter your email..."
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
                             />
@@ -60,7 +60,7 @@ const Login = () => {
                                 type="password"
                                 required
                                 className="mt-1 appearance-none relative block w-full px-3 py-3 border border-gray-300 dark:border-slate-600 placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-white bg-white dark:bg-slate-700 rounded-lg focus:outline-none focus:ring-red-500 focus:border-red-500 focus:z-10 sm:text-sm transition-colors duration-200"
-                                placeholder="••••••••"
+                                placeholder="Enter your password..."
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                             />
