@@ -23,7 +23,7 @@ const generateContent = asyncHandler(async (req, res) => {
         generatedDescription: aiResponse.description || "",
         generatedCaption: aiResponse.caption || "",
         generatedHashtags: aiResponse.hashtags || "",
-        generatedSummary: aiResponse.summary || ""
+        generatedSummary: Array.isArray(aiResponse.summary) ? aiResponse.summary.join("\n") : (aiResponse.summary || "")
     });
 
     return res.status(201).json(

@@ -34,7 +34,7 @@ const generateContentFromAI = async (transcript) => {
                     content: prompt,
                 },
             ],
-            model: "llama3-8b-8192", // Using a fast, free tier model
+            model: "llama-3.1-8b-instant", // Using the updated model
             temperature: 0.7,
             max_tokens: 1024,
             top_p: 1,
