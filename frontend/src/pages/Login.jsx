@@ -27,34 +27,39 @@ const Login = () => {
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-            <div className="max-w-md w-full space-y-8 bg-white p-10 rounded-2xl shadow-xl border border-gray-100">
+        <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-slate-900 py-12 px-4 sm:px-6 lg:px-8 transition-colors duration-200">
+            <div className="max-w-md w-full space-y-8 bg-white dark:bg-slate-800 p-10 rounded-2xl shadow-xl border border-gray-100 dark:border-slate-700 transition-colors duration-200">
                 <div className="text-center">
                     <Sparkles className="mx-auto h-12 w-12 text-indigo-600" />
-                    <h2 className="mt-6 text-3xl font-extrabold text-gray-900">Welcome back</h2>
-                    <p className="mt-2 text-sm text-gray-600">
+                    <h2 className="mt-6 text-3xl font-extrabold text-gray-900 dark:text-white">Welcome back</h2>
+                    <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
                         Please sign in to your account
                     </p>
+                </div>
+
+                <div className="flex p-1 mt-6 space-x-1 bg-gray-100 dark:bg-slate-700 rounded-xl">
+                    <button className="w-full py-2.5 text-sm font-medium leading-5 text-indigo-700 dark:text-indigo-400 bg-white dark:bg-slate-800 rounded-lg shadow">Login</button>
+                    <Link to="/register" className="w-full py-2.5 text-sm font-medium leading-5 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white text-center rounded-lg transition-colors">Register</Link>
                 </div>
                 <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
                     <div className="space-y-4">
                         <div>
-                            <label className="block text-sm font-medium text-gray-700">Email Address</label>
+                            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Email Address</label>
                             <input
                                 type="email"
                                 required
-                                className="mt-1 appearance-none relative block w-full px-3 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-lg focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                                className="mt-1 appearance-none relative block w-full px-3 py-3 border border-gray-300 dark:border-slate-600 placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-white bg-white dark:bg-slate-700 rounded-lg focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm transition-colors duration-200"
                                 placeholder="you@example.com"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
                             />
                         </div>
                         <div>
-                            <label className="block text-sm font-medium text-gray-700">Password</label>
+                            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Password</label>
                             <input
                                 type="password"
                                 required
-                                className="mt-1 appearance-none relative block w-full px-3 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-lg focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                                className="mt-1 appearance-none relative block w-full px-3 py-3 border border-gray-300 dark:border-slate-600 placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-white bg-white dark:bg-slate-700 rounded-lg focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm transition-colors duration-200"
                                 placeholder="••••••••"
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
@@ -70,12 +75,6 @@ const Login = () => {
                         >
                             {loading ? "Signing in..." : "Sign in"}
                         </button>
-                    </div>
-                    <div className="text-center mt-4">
-                        <span className="text-sm text-gray-600">Don't have an account? </span>
-                        <Link to="/register" className="font-medium text-indigo-600 hover:text-indigo-500">
-                            Register here
-                        </Link>
                     </div>
                 </form>
             </div>

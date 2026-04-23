@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, AuthContext } from './context/AuthContext';
+import { ThemeProvider } from './context/ThemeContext';
 import { useContext } from 'react';
 import Navbar from './components/Navbar';
 import Login from './pages/Login';
@@ -35,7 +36,7 @@ const PublicRoute = ({ children }) => {
 
 function AppRoutes() {
   return (
-    <div className="min-h-screen bg-slate-50 font-sans">
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-900 font-sans transition-colors duration-200">
       <Navbar />
       <main>
         <Routes>
@@ -79,12 +80,14 @@ function AppRoutes() {
 
 function App() {
   return (
-    <AuthProvider>
-      <Router>
-        <AppRoutes />
-        <ToastContainer position="bottom-right" />
-      </Router>
-    </AuthProvider>
+    <ThemeProvider>
+      <AuthProvider>
+        <Router>
+          <AppRoutes />
+          <ToastContainer position="bottom-right" theme="colored" />
+        </Router>
+      </AuthProvider>
+    </ThemeProvider>
   );
 }
 
