@@ -65,7 +65,8 @@ const loginUser = asyncHandler(async (req, res) => {
 
     const options = {
         httpOnly: true,
-        secure: process.env.NODE_ENV === "production"
+        secure: true, // Always true for cross-origin deployments (Vercel -> Render)
+        sameSite: "none" // Required for cross-origin cookies
     }
 
     return res
@@ -83,7 +84,8 @@ const loginUser = asyncHandler(async (req, res) => {
 const logoutUser = asyncHandler(async (req, res) => {
     const options = {
         httpOnly: true,
-        secure: process.env.NODE_ENV === "production"
+        secure: true,
+        sameSite: "none"
     };
 
     return res
