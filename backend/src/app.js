@@ -5,7 +5,11 @@ import cookieParser from 'cookie-parser';
 const app = express();
 
 app.use(cors({
-    origin: process.env.CORS_ORIGIN || "http://localhost:5173",
+    origin: function (origin, callback) {
+        // Reflect the exact origin back to the client to bypass wildcard (*) restrictions when credentials: true
+        if (!origin) return callback(null, true);
+        return callback(null, origin);
+    },
     credentials: true
 }));
 
