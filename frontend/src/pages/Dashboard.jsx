@@ -39,7 +39,7 @@ const Dashboard = () => {
                 <div className="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-700 h-fit transition-colors duration-200">
                     <div className="mb-6">
                         <h2 className="text-2xl font-bold text-gray-900 dark:text-white flex items-center gap-2 transition-colors">
-                            <Sparkles className="h-6 w-6 text-indigo-600" />
+                            <Sparkles className="h-6 w-6 text-red-600" />
                             Generate Content
                         </h2>
                         <p className="text-gray-500 dark:text-gray-400 mt-1 transition-colors">Upload your video or audio to get AI-optimized content.</p>
@@ -50,7 +50,7 @@ const Dashboard = () => {
                             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 transition-colors">Video Title (Optional)</label>
                             <input
                                 type="text"
-                                className="w-full px-4 py-2 border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all duration-200"
+                                className="w-full px-4 py-2 border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition-all duration-200"
                                 placeholder="E.g., How to Build a React App"
                                 value={videoTitle}
                                 onChange={(e) => setVideoTitle(e.target.value)}
@@ -62,10 +62,10 @@ const Dashboard = () => {
                             {!videoFile ? (
                                 <div 
                                     onClick={() => fileInputRef.current?.click()}
-                                    className="w-full flex flex-col items-center justify-center p-8 border-2 border-dashed border-gray-300 dark:border-slate-600 rounded-xl cursor-pointer hover:bg-gray-50 dark:hover:bg-slate-700 hover:border-indigo-400 dark:hover:border-indigo-500 transition-all bg-white dark:bg-slate-800 group"
+                                    className="w-full flex flex-col items-center justify-center p-8 border-2 border-dashed border-gray-300 dark:border-slate-600 rounded-xl cursor-pointer hover:bg-gray-50 dark:hover:bg-slate-700 hover:border-red-400 dark:hover:border-red-500 transition-all bg-white dark:bg-slate-800 group"
                                 >
-                                    <div className="p-3 bg-indigo-50 dark:bg-indigo-500/10 rounded-full mb-3 group-hover:bg-indigo-100 dark:group-hover:bg-indigo-500/20 transition-colors">
-                                        <UploadCloud className="h-8 w-8 text-indigo-600 dark:text-indigo-400" />
+                                    <div className="p-3 bg-red-50 dark:bg-red-500/10 rounded-full mb-3 group-hover:bg-red-100 dark:group-hover:bg-red-500/20 transition-colors">
+                                        <UploadCloud className="h-8 w-8 text-red-600 dark:text-red-400" />
                                     </div>
                                     <p className="text-sm font-medium text-gray-700 dark:text-gray-200 mb-1 transition-colors">Click to upload media</p>
                                     <p className="text-xs text-gray-500 dark:text-gray-400 transition-colors">MP4, MP3, M4A up to 25MB</p>
@@ -73,7 +73,7 @@ const Dashboard = () => {
                             ) : (
                                 <div className="w-full flex items-center justify-between p-4 border border-gray-200 dark:border-slate-600 rounded-xl bg-gray-50 dark:bg-slate-700 shadow-sm transition-colors">
                                     <div className="flex items-center space-x-3 overflow-hidden">
-                                        <div className="p-2 bg-indigo-100 dark:bg-indigo-500/20 rounded-lg text-indigo-600 dark:text-indigo-400 shrink-0 transition-colors">
+                                        <div className="p-2 bg-red-100 dark:bg-red-500/20 rounded-lg text-red-600 dark:text-red-400 shrink-0 transition-colors">
                                             <FileVideo className="h-6 w-6" />
                                         </div>
                                         <div className="truncate">
@@ -112,7 +112,7 @@ const Dashboard = () => {
                         <button
                             type="submit"
                             disabled={loading || !videoFile}
-                            className="w-full py-3 px-4 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg font-medium flex items-center justify-center gap-2 transition-colors disabled:opacity-70 disabled:cursor-not-allowed"
+                            className="w-full py-3 px-4 bg-red-600 hover:bg-red-700 text-white rounded-lg font-medium flex items-center justify-center gap-2 transition-colors disabled:opacity-70 disabled:cursor-not-allowed"
                         >
                             {loading ? (
                                 <>
@@ -134,7 +134,7 @@ const Dashboard = () => {
                     {loading ? (
                         <div className="h-full flex flex-col items-center justify-center space-y-4 text-gray-400 dark:text-gray-500 min-h-[400px] border-2 border-dashed border-gray-200 dark:border-slate-700 rounded-2xl bg-gray-50/50 dark:bg-slate-800/50 px-6 text-center transition-colors duration-200">
                             <div className="p-4 bg-white dark:bg-slate-800 rounded-full shadow-sm mb-2 transition-colors duration-200">
-                                <Loader2 className="h-8 w-8 animate-spin text-indigo-600 dark:text-indigo-400" />
+                                <Loader2 className="h-8 w-8 animate-spin text-red-600 dark:text-red-400" />
                             </div>
                             <div>
                                 <p className="text-base font-medium text-gray-700 dark:text-gray-300">Uploading & Transcribing Video...</p>

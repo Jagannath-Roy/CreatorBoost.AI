@@ -20,8 +20,8 @@ const Navbar = () => {
                 <div className="flex justify-between h-16">
                     <div className="flex">
                         <Link to="/" className="flex-shrink-0 flex items-center gap-2">
-                            <Sparkles className="h-8 w-8 text-indigo-600" />
-                            <span className="font-bold text-xl bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-violet-600">
+                            <Sparkles className="h-8 w-8 text-red-600" />
+                            <span className="font-bold text-xl bg-clip-text text-transparent bg-gradient-to-r from-red-600 to-orange-600">
                                 CreatorBoost AI
                             </span>
                         </Link>
@@ -51,7 +51,7 @@ const Navbar = () => {
                                 <span className="text-sm text-gray-500 dark:text-gray-400 hidden sm:block">Hello, {user.name}</span>
                                 <button
                                     onClick={handleLogout}
-                                    className="inline-flex items-center gap-2 px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors"
+                                    className="inline-flex items-center gap-2 px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition-colors"
                                 >
                                     <LogOut className="h-4 w-4" />
                                     Logout

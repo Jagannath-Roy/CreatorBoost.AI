@@ -20,7 +20,7 @@ const GeneratedContentCard = ({ title, content }) => {
                 <h3 className="text-sm font-semibold text-gray-700 dark:text-gray-200 uppercase tracking-wider">{title}</h3>
                 <button 
                     onClick={handleCopy}
-                    className="text-gray-400 dark:text-gray-500 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors p-1 rounded-md hover:bg-indigo-50 dark:hover:bg-slate-600"
+                    className="text-gray-400 dark:text-gray-500 hover:text-red-600 dark:hover:text-red-400 transition-colors p-1 rounded-md hover:bg-red-50 dark:hover:bg-slate-600"
                     title="Copy to clipboard"
                 >
                     {copied ? <CheckCircle2 className="h-4 w-4 text-green-500" /> : <Copy className="h-4 w-4" />}

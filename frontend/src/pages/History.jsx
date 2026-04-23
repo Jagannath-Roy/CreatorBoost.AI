@@ -26,7 +26,7 @@ const History = () => {
     if (loading) {
         return (
             <div className="min-h-[calc(100vh-64px)] flex items-center justify-center">
-                <Loader2 className="h-10 w-10 animate-spin text-indigo-600" />
+                <Loader2 className="h-10 w-10 animate-spin text-red-600" />
             </div>
         );
     }
@@ -35,7 +35,7 @@ const History = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             <div className="mb-8">
                 <h2 className="text-3xl font-bold text-gray-900 dark:text-white flex items-center gap-2 transition-colors">
-                    <HistoryIcon className="h-8 w-8 text-indigo-600" />
+                    <HistoryIcon className="h-8 w-8 text-red-600" />
                     My Content History
                 </h2>
                 <p className="text-gray-500 dark:text-gray-400 mt-2 transition-colors">View your previously generated AI content.</p>
