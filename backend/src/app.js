@@ -5,11 +5,7 @@ import cookieParser from 'cookie-parser';
 const app = express();
 
 app.use(cors({
-    origin: function (origin, callback) {
-        // Reflect the exact origin back to the client to bypass wildcard (*) restrictions when credentials: true
-        if (!origin) return callback(null, true);
-        return callback(null, origin);
-    },
+    origin: true, // Automatically reflects the request origin, fully supporting Vercel preview/production URLs
     credentials: true
 }));
 
@@ -24,5 +20,10 @@ import contentRouter from './routes/content.routes.js';
 // Routes declaration
 app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/content', contentRouter);
+
+// Simple health check route
+app.get('/ping', (req, res) => {
+    res.status(200).json({ status: 'active', message: 'Backend is running perfectly' });
+});
 
 export { app };
