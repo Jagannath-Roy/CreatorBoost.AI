@@ -1,8 +1,9 @@
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { AuthProvider, AuthContext } from './context/AuthContext';
 import { ThemeProvider } from './context/ThemeContext';
 import { useContext } from 'react';
 import Navbar from './components/Navbar';
+import Landing from './pages/Landing';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
@@ -28,18 +29,29 @@ const PublicRoute = ({ children }) => {
   if (loading) return null;
 
   if (user) {
-    return <Navigate to="/" replace />;
+    return <Navigate to="/dashboard" replace />;
   }
 
   return children;
 };
 
 function AppRoutes() {
+  const location = useLocation();
+  const isLandingPage = location.pathname === '/';
+
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-900 font-sans transition-colors duration-200">
-      <Navbar />
+      {!isLandingPage && <Navbar />}
       <main>
         <Routes>
+          <Route 
+            path="/" 
+            element={
+              <PublicRoute>
+                <Landing />
+              </PublicRoute>
+            } 
+          />
           <Route 
             path="/login" 
             element={
@@ -57,7 +69,7 @@ function AppRoutes() {
             } 
           />
           <Route 
-            path="/" 
+            path="/dashboard" 
             element={
               <ProtectedRoute>
                 <Dashboard />

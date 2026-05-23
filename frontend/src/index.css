@@ -2,4 +2,146 @@
 
 @custom-variant dark (&:is(.dark, .dark *));
 
-/* Your other styles below */
+@theme {
+  --color-tertiary-fixed-dim: #d0bcff;
+  --color-surface-tint: #c0c1ff;
+  --color-on-error-container: #ffdad6;
+  --color-ghost-white: #EDEDEF;
+  --color-tertiary-fixed: #e9ddff;
+  --color-inverse-surface: #e2e2e8;
+  --color-on-surface: #e2e2e8;
+  --color-on-primary: #1000a9;
+  --color-surface-bright: #37393e;
+  --color-primary-fixed-dim: #c0c1ff;
+  --color-on-background: #e2e2e8;
+  --color-primary: #c0c1ff;
+  --color-background: #111317;
+  --color-on-tertiary-fixed-variant: #5516be;
+  --color-on-secondary: #00363b;
+  --color-on-primary-fixed: #07006c;
+  --color-border-subtle: rgba(255, 255, 255, 0.08);
+  --color-glass-bg: rgba(15, 17, 21, 0.7);
+  --color-surface-container-high: #282a2e;
+  --color-outline-variant: #464554;
+  --color-secondary: #5ed7e4;
+  --color-on-secondary-container: #002f33;
+  --color-secondary-fixed: #84f3ff;
+  --color-surface-container-lowest: #0c0e12;
+  --color-on-tertiary-container: #340080;
+  --color-on-primary-fixed-variant: #2f2ebe;
+  --color-slate-gray: #7E7D86;
+  --color-surface-container-highest: #333539;
+  --color-on-primary-container: #0d0096;
+  --color-surface-dim: #111317;
+  --color-secondary-fixed-dim: #5ed7e4;
+  --color-surface-variant: #333539;
+  --color-on-surface-variant: #c7c4d7;
+  --color-on-tertiary-fixed: #23005c;
+  --color-outline: #908fa0;
+  --color-error-container: #93000a;
+  --color-tertiary-container: #a078ff;
+  --color-on-secondary-fixed: #002023;
+  --color-primary-container: #8083ff;
+  --color-surface-container: #1e2024;
+  --color-on-secondary-fixed-variant: #004f55;
+  --color-primary-fixed: #e1e0ff;
+  --color-on-tertiary: #3c0091;
+  --color-surface-container-low: #1a1c20;
+  --color-tertiary: #d0bcff;
+  --color-inverse-primary: #494bd6;
+  --color-surface: #111317;
+  --color-on-error: #690005;
+  --color-secondary-container: #00a0ac;
+  --color-inverse-on-surface: #2f3035;
+  --color-error: #ffb4ab;
+
+  --radius-DEFAULT: 0.125rem;
+  --radius-lg: 0.25rem;
+  --radius-xl: 0.5rem;
+  --radius-full: 0.75rem;
+
+  --spacing-margin-lg: 64px;
+  --spacing-gutter: 24px;
+  --spacing-container-max: 1200px;
+  --spacing-margin-md: 32px;
+  --spacing-margin-sm: 16px;
+  --spacing-unit: 4px;
+
+  --font-label-sm: Geist, sans-serif;
+  --font-headline-xl: Inter, sans-serif;
+  --font-headline-lg: Inter, sans-serif;
+  --font-headline-md: Inter, sans-serif;
+  --font-body-lg: Inter, sans-serif;
+  --font-headline-lg-mobile: Inter, sans-serif;
+  --font-body-sm: Inter, sans-serif;
+  --font-label-md: Geist, sans-serif;
+  --font-body-md: Inter, sans-serif;
+}
+
+@utility text-label-sm {
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0.05em;
+  font-weight: 500;
+}
+@utility text-headline-xl {
+  font-size: 48px;
+  line-height: 56px;
+  letter-spacing: -0.02em;
+  font-weight: 700;
+}
+@utility text-headline-lg {
+  font-size: 32px;
+  line-height: 40px;
+  letter-spacing: -0.02em;
+  font-weight: 600;
+}
+@utility text-headline-md {
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 600;
+}
+@utility text-body-lg {
+  font-size: 18px;
+  line-height: 28px;
+  font-weight: 400;
+}
+@utility text-headline-lg-mobile {
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 600;
+}
+@utility text-body-sm {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+}
+@utility text-label-md {
+  font-size: 14px;
+  line-height: 16px;
+  letter-spacing: 0.02em;
+  font-weight: 500;
+}
+@utility text-body-md {
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+.glow-button {
+  box-shadow: 0 0 15px rgba(192, 193, 255, 0.2);
+}
+.glow-button:hover {
+  box-shadow: 0 0 25px rgba(192, 193, 255, 0.4);
+}
+.mesh-gradient {
+  background: radial-gradient(circle at 50% -20%, rgba(192, 193, 255, 0.15) 0%, rgba(15, 17, 21, 0) 50%);
+}
+.slide-content {
+  transition: all 0.5s ease-in-out;
+}
