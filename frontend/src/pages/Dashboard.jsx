@@ -77,10 +77,10 @@ const LockedThumbnailCard = () => (
 
 const LoadingResultsPlaceholder = () => {
     const fields = [
-        { label: 'Video Title', isSecondary: false },
-        { label: 'Video Summary', isSecondary: false },
-        { label: 'Full Description', isSecondary: false },
-        { label: 'Video Timestamps', isSecondary: false },
+        { label: 'Title', isSecondary: false },
+        { label: 'Summary', isSecondary: false },
+        { label: 'Description', isSecondary: false },
+        { label: 'Timestamps', isSecondary: false },
         { label: 'Short-Form Caption (TikTok/Reels/Shorts)', isSecondary: true },
         { label: 'Hashtags', isSecondary: false }
     ];
