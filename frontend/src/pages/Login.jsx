@@ -90,7 +90,7 @@ const Login = () => {
                                 <input 
                                     className="w-full bg-surface-container-lowest border border-border-subtle rounded-xl px-4 py-2.5 text-body-md font-body-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all placeholder:text-outline-variant" 
                                     id="email" 
-                                    placeholder="name@company.com" 
+                                    placeholder="Enter you registered email id..." 
                                     type="email" 
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}

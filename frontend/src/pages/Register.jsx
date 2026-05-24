@@ -71,7 +71,7 @@ const Register = () => {
                             <input 
                                 className="w-full bg-surface-container-low border border-border-subtle rounded-xl px-4 py-2 focus:outline-none focus:border-primary transition-colors text-on-surface placeholder:text-slate-gray/50" 
                                 id="name" 
-                                placeholder="Jagannath Roy" 
+                                placeholder="Enter your full name..." 
                                 type="text"
                                 value={name}
                                 onChange={(e) => setName(e.target.value)}
@@ -84,7 +84,7 @@ const Register = () => {
                             <input 
                                 className="w-full bg-surface-container-low border border-border-subtle rounded-xl px-4 py-2 focus:outline-none focus:border-primary transition-colors text-on-surface placeholder:text-slate-gray/50" 
                                 id="email" 
-                                placeholder="jagannath@gmail.com" 
+                                placeholder="Enter your email id..." 
                                 type="email"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
