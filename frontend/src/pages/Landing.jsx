@@ -127,8 +127,8 @@ const Landing = () => {
                                 <div className={`slide-content absolute inset-0 flex flex-col px-2 md:px-4 transition-all duration-500 ease-in-out ${getSlideClass(0)}`}>
                                     <div className="flex items-center justify-between mb-4">
                                         <div className="flex items-center gap-2 text-primary">
-                                            <span className="material-symbols-outlined text-sm">auto_awesome</span>
-                                            <h3 className="text-[11px] md:text-label-md font-bold tracking-[0.1em] uppercase">✨ Catchy Titles Generated</h3>
+                                            
+                                            <h3 className="text-[11px] md:text-label-md font-bold tracking-[0.1em] uppercase">Catchy Titles Generated</h3>
                                         </div>
                                         <button className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-slate-gray hover:text-primary hover:bg-white/10 transition-all duration-200" title="Copy Content">
                                             <span className="material-symbols-outlined text-[18px]">content_copy</span>
@@ -148,7 +148,7 @@ const Landing = () => {
                                     <div className="flex items-center justify-between mb-4">
                                         <div className="flex items-center gap-2 text-secondary">
                                             <span className="material-symbols-outlined text-sm">description</span>
-                                            <h3 className="text-[11px] md:text-label-md font-bold tracking-[0.1em] uppercase">📝 Optimized Description</h3>
+                                            <h3 className="text-[11px] md:text-label-md font-bold tracking-[0.1em] uppercase">SEO Friendly Description</h3>
                                         </div>
                                         <button className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-slate-gray hover:text-primary hover:bg-white/10 transition-all duration-200" title="Copy Content">
                                             <span className="material-symbols-outlined text-[18px]">content_copy</span>
@@ -169,7 +169,7 @@ const Landing = () => {
                                     <div className="flex items-center justify-between mb-4">
                                         <div className="flex items-center gap-2 text-tertiary">
                                             <span className="material-symbols-outlined text-sm">phone_iphone</span>
-                                            <h3 className="text-[11px] md:text-label-md font-bold tracking-[0.1em] uppercase">📱 Viral Shorts Captions</h3>
+                                            <h3 className="text-[11px] md:text-label-md font-bold tracking-[0.1em] uppercase"> Viral Shorts Captions</h3>
                                         </div>
                                         <button className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-slate-gray hover:text-primary hover:bg-white/10 transition-all duration-200" title="Copy Content">
                                             <span className="material-symbols-outlined text-[18px]">content_copy</span>
@@ -188,7 +188,7 @@ const Landing = () => {
                                     <div className="flex items-center justify-between mb-4">
                                         <div className="flex items-center gap-2 text-on-surface-variant">
                                             <span className="material-symbols-outlined text-sm">hourglass_bottom</span>
-                                            <h3 className="text-[11px] md:text-label-md font-bold tracking-[0.1em] uppercase">⏳ Smart Video Chapters</h3>
+                                            <h3 className="text-[11px] md:text-label-md font-bold tracking-[0.1em] uppercase"> Video Timestamps</h3>
                                         </div>
                                         <button className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-slate-gray hover:text-primary hover:bg-white/10 transition-all duration-200" title="Copy Content">
                                             <span className="material-symbols-outlined text-[18px]">content_copy</span>
