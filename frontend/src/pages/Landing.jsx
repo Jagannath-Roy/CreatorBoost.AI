@@ -73,7 +73,7 @@ const Landing = () => {
                         We will Automate the Reach.
                     </h1>
                     <p className="font-body-lg text-body-md md:text-body-lg text-slate-gray max-w-2xl mx-auto mb-10">
-                        You do the fun part—shooting and editing. We handle the rest. Just drop your video or audio file here to instantly get perfect <span className="font-semibold text-primary">titles</span>, <span className="font-semibold text-primary">descriptions</span>, <span className="font-semibold text-primary">timestamps</span>, <span className="font-semibold text-primary">captions</span>, and <span className="font-semibold text-primary">hashtags</span>.
+                        You do the fun part—shooting and editing. We handle the rest. Just drop your video or audio file here to instantly get perfect <span className="font-semibold text-primary">titles</span>, <span className="font-semibold text-primary">descriptions</span>, <span className="font-semibold text-primary">summary</span>, <span className="font-semibold text-primary">timestamps</span>, <span className="font-semibold text-primary">captions</span>, <span className="font-semibold text-primary">hashtags</span> and <span className="font-semibold text-primary">thumbnails</span>.
                     </p>
                     <div className="flex justify-center mb-16 md:mb-20">
                         <Link to="/register" className="bg-primary text-on-primary font-label-md text-label-md px-8 py-4 rounded-xl glow-button hover:scale-105 transition-transform duration-200 w-full sm:w-auto inline-block">
@@ -227,34 +227,54 @@ const Landing = () => {
                         <h2 className="font-headline-lg text-headline-lg-mobile md:text-headline-lg mb-4">Powerful Features for Modern Creators</h2>
                         <p className="font-body-md text-body-md text-slate-gray">Everything you need to scale your reach across all platforms.</p>
                     </div>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-gutter">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 md:gap-gutter">
                         <div className="glass-card p-6 md:p-8 rounded-xl hover:translate-y-[-8px] transition-all duration-300">
                             <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-6">
                                 <span className="material-symbols-outlined text-primary">cloud_upload</span>
                             </div>
                             <h3 className="font-headline-md text-headline-md mb-3 text-lg">Simple File Uploads</h3>
-                            <p className="font-body-sm text-body-sm text-slate-gray">Drop any video or audio file. Our system listens to your speech and transcribes the entire file into clean text instantly.</p>
+                            <p className="font-body-sm text-body-sm text-slate-gray">Upload or drag any video or audio file. Our AI system analyses and process the entire file .</p>
                         </div>
                         <div className="glass-card p-6 md:p-8 rounded-xl hover:translate-y-[-8px] transition-all duration-300">
                             <div className="w-12 h-12 rounded-xl bg-secondary/10 flex items-center justify-center mb-6">
                                 <span className="material-symbols-outlined text-secondary">smart_toy</span>
                             </div>
-                            <h3 className="font-headline-md text-headline-md mb-3 text-lg">High-Performing Video Maker</h3>
-                            <p className="font-body-sm text-body-sm text-slate-gray">Get catchy titles that make people want to click, along with complete descriptions ready to copy-paste.</p>
+                            <h3 className="font-headline-md text-headline-md mb-3 text-lg"> Core Text Elements</h3>
+                            <p className="font-body-sm text-body-sm text-slate-gray mb-4">The AI instantly generates :</p>
+                            <ul className="font-body-sm text-body-sm text-slate-gray space-y-3 list-none">
+                                <li className="flex gap-2 items-start"><span className="text-secondary mt-0.5">•</span> <span>Catchy Titles</span></li>
+                                <li className="flex gap-2 items-start"><span className="text-secondary mt-0.5">•</span> <span>Detailed Description </span></li>
+                                <li className="flex gap-2 items-start"><span className="text-secondary mt-0.5">•</span> <span>Clean Summaries </span></li>
+                            </ul>
+                        </div>
+                        <div className="glass-card p-6 md:p-8 rounded-xl hover:translate-y-[-8px] transition-all duration-300">
+                            <div className="w-12 h-12 rounded-xl bg-secondary/20 flex items-center justify-center mb-6">
+                                <span className="material-symbols-outlined text-secondary">rocket_launch</span>
+                            </div>
+                            <h3 className="font-headline-md text-headline-md mb-3 text-lg"> Discovery & Engagement</h3>
+                            <p className="font-body-sm text-body-sm text-slate-gray mb-4">Increase your content reach by using AI generated:</p>
+                            <ul className="font-body-sm text-body-sm text-slate-gray space-y-3 list-none">
+                                <li className="flex gap-2 items-start"><span className="text-secondary mt-0.5">•</span> <span>Short-Form Captions</span></li>
+                                <li className="flex gap-2 items-start"><span className="text-secondary mt-0.5">•</span> <span>Hashtags</span></li>
+                                <li className="flex gap-2 items-start"><span className="text-secondary mt-0.5">•</span> <span>Timestamps</span></li>
+                            </ul>
                         </div>
                         <div className="glass-card p-6 md:p-8 rounded-xl hover:translate-y-[-8px] transition-all duration-300">
                             <div className="w-12 h-12 rounded-xl bg-tertiary/10 flex items-center justify-center mb-6">
                                 <span className="material-symbols-outlined text-tertiary">smartphone</span>
                             </div>
-                            <h3 className="font-headline-md text-headline-md mb-3 text-lg">Viral Social Captions</h3>
-                            <p className="font-body-sm text-body-sm text-slate-gray">Turn long talking videos into short, punchy captions written specifically to stand out on social media feeds.</p>
+                            <h3 className="font-headline-md text-headline-md mb-3 text-lg">Thumbnail</h3>
+                            <ul className="font-body-sm text-body-sm text-slate-gray space-y-3 list-none">
+                                <li className="flex gap-2 items-start"><span className="text-tertiary mt-0.5"></span> <span>Let our AI create beautiful thumbnails:</span></li>
+                                <li className="flex gap-2 items-start"><span className="text-tertiary mt-0.5"></span> <span>  We handle the design style and layout so that your content gets maximum clicks.</span></li>
+                            </ul>
                         </div>
                         <div className="glass-card p-6 md:p-8 rounded-xl hover:translate-y-[-8px] transition-all duration-300">
                             <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-6">
                                 <span className="material-symbols-outlined text-primary">dashboard</span>
                             </div>
                             <h3 className="font-headline-md text-headline-md mb-3 text-lg">Your Private File Vault</h3>
-                            <p className="font-body-sm text-body-sm text-slate-gray">Never lose your generated ideas. Access your private dashboard to easily see, copy, and reuse any past description.</p>
+                            <p className="font-body-sm text-body-sm text-slate-gray">Never lose your generated ideas. Access your private dashboard to easily see, copy, and reuse any past generated content.</p>
                         </div>
                     </div>
                 </section>
@@ -271,12 +291,12 @@ const Landing = () => {
                             <div className="relative z-10 text-center">
                                 <div className="w-16 h-16 rounded-full bg-background border-2 border-primary flex items-center justify-center mx-auto mb-6 text-headline-md font-bold text-primary shadow-[0_0_20px_rgba(192,193,255,0.3)]">1</div>
                                 <h4 className="font-headline-md text-headline-md mb-4">Drop Your File</h4>
-                                <p className="font-body-md text-body-md text-slate-gray">Upload your finished media file and let our AI handle the transcription and analysis automatically.</p>
+                                <p className="font-body-md text-body-md text-slate-gray">Upload your finished media file and let our AI handle the analysis automatically.</p>
                             </div>
                             <div className="relative z-10 text-center">
                                 <div className="w-16 h-16 rounded-full bg-background border-2 border-primary flex items-center justify-center mx-auto mb-6 text-headline-md font-bold text-primary shadow-[0_0_20px_rgba(192,193,255,0.3)]">2</div>
                                 <h4 className="font-headline-md text-headline-md mb-4">Optimize Content</h4>
-                                <p className="font-body-md text-body-md text-slate-gray">Review customized titles, captions, and tags generated based on your video's specific context.</p>
+                                <p className="font-body-md text-body-md text-slate-gray">Review  customized titles, summary, description, timestamps, captions, hashtags and thumbnail generated based on your video's specific context.</p>
                             </div>
                             <div className="relative z-10 text-center">
                                 <div className="w-16 h-16 rounded-full bg-background border-2 border-primary flex items-center justify-center mx-auto mb-6 text-headline-md font-bold text-primary shadow-[0_0_20px_rgba(192,193,255,0.3)]">3</div>
