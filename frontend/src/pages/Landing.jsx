@@ -69,7 +69,7 @@ const Landing = () => {
                 {/* Hero Section */}
                 <section className="max-w-container-max mx-auto px-6 lg:px-margin-lg text-center mb-16 md:mb-margin-lg">
                     <h1 className="font-headline-xl text-headline-lg-mobile md:text-headline-xl mb-6 max-w-4xl mx-auto leading-tight">
-                        You Create the Content, <br/>
+                        You Create the Content, <br />
                         We will Automate the Reach.
                     </h1>
                     <p className="font-body-lg text-body-md md:text-body-lg text-slate-gray max-w-2xl mx-auto mb-10">
@@ -86,8 +86,8 @@ const Landing = () => {
                         {/* LEFT SIDE: Active Asset Project */}
                         <div className="flex flex-col space-y-4">
                             <div className="flex items-center justify-between">
-                                <h3 className="text-[10px] md:text-label-sm font-label-sm text-slate-gray tracking-wider uppercase">ACTIVE VIDEO PROJECT</h3>
-                                <span className="px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 text-[9px] md:text-[10px] font-bold border border-emerald-500/30">Content Processed Successfully</span>
+
+                                <span className="ml-[5px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 text-[9px] md:text-[10px] font-bold border border-emerald-500/30">Content Processed Successfully</span>
                             </div>
                             <div className="p-3 md:p-4 rounded-xl bg-surface-container-low border border-border-subtle flex items-start gap-4">
                                 <div className="w-8 h-8 md:w-10 md:h-10 rounded-lg bg-primary/20 flex items-center justify-center shrink-0">
@@ -122,7 +122,7 @@ const Landing = () => {
                                 <span className="material-symbols-outlined text-lg md:text-xl">chevron_right</span>
                             </button>
                             <div className="flex-1 min-h-[240px] md:min-h-[280px] relative overflow-hidden px-2 md:px-4">
-                                
+
                                 {/* Slide 1 */}
                                 <div className={`slide-content absolute inset-0 flex flex-col px-2 md:px-4 transition-all duration-500 ease-in-out ${getSlideClass(0)}`}>
                                     <div className="flex items-center justify-between mb-4">
