@@ -206,12 +206,12 @@ const Dashboard = () => {
     return (
         <main className="flex-1 flex flex-col h-screen overflow-hidden bg-background">
             {/* Top Nav */}
-            <header className="flex justify-between items-center w-full px-4 md:px-margin-lg h-16 border-b border-border-subtle bg-glass-bg backdrop-blur-md shrink-0">
+            <header className="flex items-center justify-between px-4 md:px-margin-lg h-16 border-b border-border-subtle bg-surface/80 backdrop-blur-md shrink-0">
                 <div className="flex items-center gap-8">
-                    <span className="md:hidden font-headline-md text-headline-md font-bold text-primary">CB.ai</span>
-                    <nav className="hidden md:flex items-center gap-6">
-                        <Link className="font-body-md text-body-md text-primary border-b-2 border-primary pb-1" to="/dashboard">Dashboard</Link>
-                        <Link className="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" to="/history">History</Link>
+                    <span className="font-headline-sm text-headline-sm text-on-surface">CreatorBoost.ai</span>
+                    <nav className="hidden sm:flex items-center gap-6">
+                        <Link to="/dashboard" className="font-label-md text-label-md text-primary font-bold transition-colors">Dashboard</Link>
+                        <Link to="/history" className="font-label-md text-label-md text-slate-gray hover:text-on-surface transition-colors">History</Link>
                     </nav>
                 </div>
 

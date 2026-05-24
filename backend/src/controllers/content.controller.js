@@ -94,5 +94,21 @@ const generateFromVideo = asyncHandler(async (req, res) => {
         }
     }
 });
+const deleteHistoryItem = asyncHandler(async (req, res) => {
+    const { id } = req.params;
 
-export { generateContent, getHistory, generateFromVideo };
+    const content = await Content.findOneAndDelete({
+        _id: id,
+        userId: req.user._id
+    });
+
+    if (!content) {
+        throw new ApiError(404, "History item not found or you are not authorized to delete it");
+    }
+
+    return res.status(200).json(
+        new ApiResponse(200, {}, "Content history deleted successfully")
+    );
+});
+
+export { generateContent, getHistory, generateFromVideo, deleteHistoryItem };

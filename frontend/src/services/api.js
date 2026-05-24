@@ -35,4 +35,9 @@ export const generateContentFromVideo = async (videoTitle, file) => {
     return response.data;
 };
 
+export const deleteContentHistory = async (id) => {
+    const response = await api.delete(`/content/history/${id}`);
+    return response.data;
+};
+
 export default api;
