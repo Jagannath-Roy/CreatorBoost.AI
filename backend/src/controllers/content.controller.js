@@ -60,22 +60,12 @@ const getUploadSignature = asyncHandler(async (req, res) => {
     const timestamp = Math.round(new Date().getTime() / 1000);
     const folder = "creatorboost/temp_videos";
     
-    const apiSecret = process.env.CLOUDINARY_API_SECRET;
-    console.log("DEBUG [Upload Signature]: Generating signature...");
-    console.log("DEBUG [Upload Signature]: Secret exists?", !!apiSecret);
-    if (apiSecret) {
-        console.log("DEBUG [Upload Signature]: Secret Length:", apiSecret.length);
-        console.log("DEBUG [Upload Signature]: Secret Starts With:", apiSecret.substring(0, 3));
-    } else {
-        console.error("CRITICAL: CLOUDINARY_API_SECRET is undefined in this environment!");
-    }
-
     const signature = cloudinary.utils.api_sign_request(
         {
             timestamp: timestamp,
             folder: folder
         },
-        apiSecret
+        process.env.CLOUDINARY_API_SECRET
     );
 
     return res.status(200).json(
