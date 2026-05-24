@@ -69,12 +69,15 @@ const Landing = () => {
                 {/* Hero Section */}
                 <section className="max-w-container-max mx-auto px-6 lg:px-margin-lg text-center mb-16 md:mb-margin-lg">
                     <h1 className="font-headline-xl text-headline-lg-mobile md:text-headline-xl mb-6 max-w-4xl mx-auto leading-tight">
-                        You Create the Content, <br />
+                        You Capture the Content, <br />
                         We will Automate the Reach.
                     </h1>
-                    <p className="font-body-lg text-body-md md:text-body-lg text-slate-gray max-w-2xl mx-auto mb-10">
+                    <p className="font-body-lg text-body-md md:text-body-lg text-slate-gray max-w-2xl mx-auto mb-6">
                         You do the fun part—shooting and editing. We handle the rest. Just drop your video or audio file here to instantly get perfect <span className="font-semibold text-primary">titles</span>, <span className="font-semibold text-primary">descriptions</span>, <span className="font-semibold text-primary">summary</span>, <span className="font-semibold text-primary">timestamps</span>, <span className="font-semibold text-primary">captions</span>, <span className="font-semibold text-primary">hashtags</span> and <span className="font-semibold text-primary">thumbnails</span>.
                     </p>
+                    <h5 className="font-body-lg text-sm md:text-base text-slate-gray font-medium mb-10 max-w-2xl mx-auto text-center italic">
+                        One click and 50% of your content creation work is automatically done.
+                    </h5>
                     <div className="flex justify-center mb-16 md:mb-20">
                         <Link to="/register" className="bg-primary text-on-primary font-label-md text-label-md px-8 py-4 rounded-xl glow-button hover:scale-105 transition-transform duration-200 w-full sm:w-auto inline-block">
                             Boost Your Content Free
