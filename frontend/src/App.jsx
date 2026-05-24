@@ -37,7 +37,7 @@ const PublicRoute = ({ children }) => {
 
 function AppRoutes() {
   const location = useLocation();
-  const hideNavbarPaths = ['/', '/login', '/register'];
+  const hideNavbarPaths = ['/', '/login', '/register', '/dashboard'];
   const shouldHideNavbar = hideNavbarPaths.includes(location.pathname);
 
   return (
