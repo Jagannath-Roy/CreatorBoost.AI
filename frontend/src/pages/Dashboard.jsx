@@ -1,12 +1,12 @@
 import { useState, useRef, useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import api, { generateContentFromVideo } from '../services/api';
+import api, { generateContentFromVideo, getUploadSignature } from '../services/api';
 import { AuthContext } from '../context/AuthContext';
 import { toast } from 'react-toastify';
 
 const CopyButton = ({ text }) => {
     const [copied, setCopied] = useState(false);
-    
+
     const handleCopy = () => {
         if (!text) return;
         navigator.clipboard.writeText(text);
@@ -64,13 +64,13 @@ const LockedThumbnailCard = () => (
                 <span className="material-symbols-outlined text-5xl text-slate-gray">image</span>
             </div>
         </div>
-        
+
         {/* Overlay lock */}
         <div className="absolute inset-0 z-10 flex flex-col items-center justify-center bg-background/20 backdrop-blur-[1px] pt-8">
-             <span className="material-symbols-outlined text-4xl text-on-surface mb-3">lock</span>
-             <div className="inline-flex items-center px-4 py-1.5 bg-surface-container-highest text-on-surface font-label-sm rounded-full border border-border-subtle shadow-sm">
-                 To be rolled out soon
-             </div>
+            <span className="material-symbols-outlined text-4xl text-on-surface mb-3">lock</span>
+            <div className="inline-flex items-center px-4 py-1.5 bg-surface-container-highest text-on-surface font-label-sm rounded-full border border-border-subtle shadow-sm">
+                To be rolled out soon
+            </div>
         </div>
     </div>
 );
@@ -133,13 +133,13 @@ const StaggeredResults = ({ result }) => {
         if (visibleStep < availableSteps.length) {
             const timer = setTimeout(() => {
                 setVisibleStep(prev => prev + 1);
-            }, 1200); 
+            }, 1200);
             return () => clearTimeout(timer);
         }
     }, [visibleStep, availableSteps.length]);
 
     const renderContent = (step, content) => {
-        switch(step.type) {
+        switch (step.type) {
             case 'title':
                 return <p className="font-headline-md text-[20px] md:text-headline-md text-on-surface">{content}</p>;
             case 'summary':
@@ -199,10 +199,36 @@ const Dashboard = () => {
         setResult(null);
 
         try {
-            const response = await generateContentFromVideo(videoTitle, videoFile);
+            // 1. Get signature from backend
+            const sigResponse = await getUploadSignature();
+            const { signature, timestamp, cloudName, apiKey, folder } = sigResponse.data;
+
+            // 2. Upload to Cloudinary
+            const formData = new FormData();
+            formData.append("file", videoFile);
+            formData.append("api_key", apiKey);
+            formData.append("timestamp", timestamp);
+            formData.append("signature", signature);
+            formData.append("folder", folder);
+
+            const uploadRes = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/video/upload`, {
+                method: "POST",
+                body: formData
+            });
+
+            const uploadData = await uploadRes.json();
+
+            if (!uploadRes.ok) {
+                throw new Error(uploadData.error?.message || "Failed to upload to Cloudinary");
+            }
+
+            const { secure_url, public_id } = uploadData;
+
+            // 3. Generate content from backend
+            const response = await generateContentFromVideo(videoTitle, secure_url, public_id);
             setResult(response.data.content);
         } catch (error) {
-            toast.error(error.response?.data?.message || "Failed to generate content");
+            toast.error(error.response?.data?.message || error.message || "Failed to generate content");
         } finally {
             setLoading(false);
         }
@@ -227,8 +253,8 @@ const Dashboard = () => {
     };
 
     const handleFileSelect = (file) => {
-        if (file.size > 25 * 1024 * 1024) {
-            toast.error("File size must be less than 25MB");
+        if (file.size > 100 * 1024 * 1024) {
+            toast.error("File size must be less than 100MB");
             return;
         }
         setVideoFile(file);
@@ -239,7 +265,7 @@ const Dashboard = () => {
             {/* Top Nav */}
             <header className="flex items-center justify-between px-4 md:px-margin-lg h-16 border-b border-border-subtle bg-surface/80 backdrop-blur-md shrink-0">
                 <div className="flex items-center gap-8">
-                    <span className="font-headline-sm text-headline-sm text-on-surface">CreatorBoost.ai</span>
+                    <Link className="text-headline-md font-headline-md font-bold text-on-surface" to="/">CreatorBoost.ai</Link>
                     <nav className="hidden sm:flex items-center gap-6">
                         <Link to="/dashboard" className="font-label-md text-label-md text-primary font-bold transition-colors">Dashboard</Link>
                         <Link to="/history" className="font-label-md text-label-md text-slate-gray hover:text-on-surface transition-colors">History</Link>
@@ -264,96 +290,96 @@ const Dashboard = () => {
                     <section className="xl:col-span-5">
                         <div className="space-y-3 xl:sticky xl:top-4 z-10">
                             <div className="p-4 md:p-5 glass-card rounded-xl">
-                            <h2 className="font-headline-lg text-[22px] md:text-[24px] text-on-surface mb-1">1. Upload Your File</h2>
-                            <p className="font-body-md text-[14px] text-slate-gray mb-3">Drop your video or audio file here. We support MP4, MP3, and M4A formats up to 25MB.</p>
-                            
-                            {/* Dropzone */}
-                            {!videoFile ? (
-                                <div 
-                                    onClick={() => fileInputRef.current?.click()}
-                                    onDragOver={handleDragOver}
-                                    onDragLeave={handleDragLeave}
-                                    onDrop={handleDrop}
-                                    className={`border-2 border-dashed rounded-xl p-5 flex flex-col items-center justify-center transition-colors cursor-pointer group mb-4 ${isDragging ? 'border-primary bg-primary/5' : 'border-border-subtle bg-surface-container-low hover:border-primary/50'}`}
-                                >
-                                    <div className="w-12 h-12 rounded-full bg-surface-container-high flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
-                                        <span className="material-symbols-outlined text-primary text-2xl">cloud_upload</span>
-                                    </div>
-                                    <p className="font-label-md text-label-md text-on-surface mb-1">Select a file or drag and drop</p>
-                                    <p className="font-label-sm text-label-sm text-slate-gray">MP4, MP3, M4A (Max 25MB)</p>
-                                </div>
-                            ) : (
-                                <div className="w-full flex items-center justify-between p-3 border border-border-subtle rounded-xl bg-surface-container-low shadow-sm transition-colors mb-5">
-                                    <div className="flex items-center space-x-3 overflow-hidden">
-                                        <div className="p-2 bg-primary/20 rounded-lg text-primary shrink-0 transition-colors">
-                                            <span className="material-symbols-outlined">movie</span>
-                                        </div>
-                                        <div className="truncate">
-                                            <p className="text-sm font-medium text-on-surface truncate transition-colors">{videoFile.name}</p>
-                                            <p className="text-xs text-slate-gray transition-colors">{(videoFile.size / (1024 * 1024)).toFixed(2)} MB</p>
-                                        </div>
-                                    </div>
-                                    <button 
-                                        type="button" 
-                                        onClick={() => setVideoFile(null)}
-                                        className="p-2 text-slate-gray hover:text-error hover:bg-error/10 rounded-lg transition-colors ml-2"
-                                        title="Remove file"
+                                <h2 className="font-headline-lg text-[22px] md:text-[24px] text-on-surface mb-1">1. Upload Your File</h2>
+                                <p className="font-body-md text-[14px] text-slate-gray mb-3">Drop your video or audio file here. We support MP4, MP3, and M4A formats up to 100MB.</p>
+
+                                {/* Dropzone */}
+                                {!videoFile ? (
+                                    <div
+                                        onClick={() => fileInputRef.current?.click()}
+                                        onDragOver={handleDragOver}
+                                        onDragLeave={handleDragLeave}
+                                        onDrop={handleDrop}
+                                        className={`border-2 border-dashed rounded-xl p-5 flex flex-col items-center justify-center transition-colors cursor-pointer group mb-4 ${isDragging ? 'border-primary bg-primary/5' : 'border-border-subtle bg-surface-container-low hover:border-primary/50'}`}
                                     >
-                                        <span className="material-symbols-outlined text-[18px]">close</span>
+                                        <div className="w-12 h-12 rounded-full bg-surface-container-high flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                                            <span className="material-symbols-outlined text-primary text-2xl">cloud_upload</span>
+                                        </div>
+                                        <p className="font-label-md text-label-md text-on-surface mb-1">Select a file or drag and drop</p>
+                                        <p className="font-label-sm text-label-sm text-slate-gray">MP4, MP3, M4A (Max 100MB)</p>
+                                    </div>
+                                ) : (
+                                    <div className="w-full flex items-center justify-between p-3 border border-border-subtle rounded-xl bg-surface-container-low shadow-sm transition-colors mb-5">
+                                        <div className="flex items-center space-x-3 overflow-hidden">
+                                            <div className="p-2 bg-primary/20 rounded-lg text-primary shrink-0 transition-colors">
+                                                <span className="material-symbols-outlined">movie</span>
+                                            </div>
+                                            <div className="truncate">
+                                                <p className="text-sm font-medium text-on-surface truncate transition-colors">{videoFile.name}</p>
+                                                <p className="text-xs text-slate-gray transition-colors">{(videoFile.size / (1024 * 1024)).toFixed(2)} MB</p>
+                                            </div>
+                                        </div>
+                                        <button
+                                            type="button"
+                                            onClick={() => setVideoFile(null)}
+                                            className="p-2 text-slate-gray hover:text-error hover:bg-error/10 rounded-lg transition-colors ml-2"
+                                            title="Remove file"
+                                        >
+                                            <span className="material-symbols-outlined text-[18px]">close</span>
+                                        </button>
+                                    </div>
+                                )}
+
+                                <input
+                                    type="file"
+                                    ref={fileInputRef}
+                                    className="hidden"
+                                    accept=".mp4,.mp3,.m4a"
+                                    onChange={(e) => {
+                                        if (e.target.files && e.target.files[0]) {
+                                            handleFileSelect(e.target.files[0]);
+                                        }
+                                    }}
+                                />
+
+                                {/* Form */}
+                                <form className="space-y-4" onSubmit={handleGenerate}>
+                                    <div>
+                                        <label className="block font-label-sm text-label-sm text-slate-gray mb-1 uppercase tracking-widest">Provide Context or a Hint  (Optional)</label>
+                                        <textarea
+                                            className="w-full bg-surface-container-high border border-border-subtle rounded-xl p-3 font-body-sm text-body-sm text-on-surface focus:ring-1 focus:ring-primary focus:border-primary transition-all outline-none min-h-[60px]"
+                                            placeholder="Tell the AI what your video is about or who should watch it (e.g., 'A cooking video for beginners' or 'Focus on how to save time')."
+                                            value={videoTitle}
+                                            onChange={(e) => setVideoTitle(e.target.value)}
+                                        ></textarea>
+                                    </div>
+                                    <button
+                                        type="submit"
+                                        disabled={loading || !videoFile}
+                                        className="w-full py-2.5 bg-primary text-on-primary font-label-md text-label-md rounded-xl glow-button active:scale-95 transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed disabled:active:scale-100"
+                                    >
+                                        {loading ? (
+                                            <>
+                                                <span className="material-symbols-outlined animate-spin">progress_activity</span>
+                                                Processing Content...
+                                            </>
+                                        ) : (
+                                            "Generate Content"
+                                        )}
                                     </button>
-                                </div>
-                            )}
+                                </form>
+                            </div>
 
-                            <input
-                                type="file"
-                                ref={fileInputRef}
-                                className="hidden"
-                                accept=".mp4,.mp3,.m4a"
-                                onChange={(e) => {
-                                    if (e.target.files && e.target.files[0]) {
-                                        handleFileSelect(e.target.files[0]);
-                                    }
-                                }}
-                            />
-
-                            {/* Form */}
-                            <form className="space-y-4" onSubmit={handleGenerate}>
-                                <div>
-                                    <label className="block font-label-sm text-label-sm text-slate-gray mb-1 uppercase tracking-widest">Provide Context or a Hint  (Optional)</label>
-                                    <textarea 
-                                        className="w-full bg-surface-container-high border border-border-subtle rounded-xl p-3 font-body-sm text-body-sm text-on-surface focus:ring-1 focus:ring-primary focus:border-primary transition-all outline-none min-h-[60px]" 
-                                        placeholder="Tell the AI what your video is about or who should watch it (e.g., 'A cooking video for beginners' or 'Focus on how to save time')."
-                                        value={videoTitle}
-                                        onChange={(e) => setVideoTitle(e.target.value)}
-                                    ></textarea>
-                                </div>
-                                <button 
-                                    type="submit" 
-                                    disabled={loading || !videoFile}
-                                    className="w-full py-2.5 bg-primary text-on-primary font-label-md text-label-md rounded-xl glow-button active:scale-95 transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed disabled:active:scale-100"
-                                >
-                                    {loading ? (
-                                        <>
-                                            <span className="material-symbols-outlined animate-spin">progress_activity</span>
-                                            Processing Content...
-                                        </>
-                                    ) : (
-                                        "Generate Content"
-                                    )}
-                                </button>
-                            </form>
-                        </div>
-                        
-                        {/* Extra Info Card */}
-                        <div className="p-4 glass-card rounded-xl border-l-4 border-l-tertiary">
-                            <div className="flex gap-3">
-                                <span className="material-symbols-outlined text-tertiary">tips_and_updates</span>
-                                <div>
-                                    <h4 className="font-label-md text-label-md text-on-surface">Pro Tip</h4>
-                                    <p className="font-body-sm text-[13px] text-slate-gray mt-1">Providing context helps our AI generate more accurate hooks and SEO-optimized hashtags for your specific niche.</p>
+                            {/* Extra Info Card */}
+                            <div className="p-4 glass-card rounded-xl border-l-4 border-l-tertiary">
+                                <div className="flex gap-3">
+                                    <span className="material-symbols-outlined text-tertiary">tips_and_updates</span>
+                                    <div>
+                                        <h4 className="font-label-md text-label-md text-on-surface">Pro Tip</h4>
+                                        <p className="font-body-sm text-[13px] text-slate-gray mt-1">Providing context helps our AI generate more accurate hooks and SEO-optimized hashtags for your specific niche.</p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
                         </div>
                     </section>
 

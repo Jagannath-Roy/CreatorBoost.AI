@@ -39,7 +39,7 @@ const Login = () => {
 
     return (
         <div 
-            className="flex flex-col min-h-screen text-on-background" 
+            className="flex flex-col h-screen overflow-hidden text-on-background" 
             style={{
                 backgroundColor: '#0F1115',
                 backgroundImage: 'radial-gradient(circle at 50% -20%, rgba(192, 193, 255, 0.08) 0%, transparent 50%), radial-gradient(circle at 0% 100%, rgba(208, 188, 255, 0.05) 0%, transparent 40%)',
@@ -48,22 +48,22 @@ const Login = () => {
         >
             {/* TopNavBar */}
             <header className="sticky top-0 z-50 w-full bg-glass-bg backdrop-blur-md border-b border-border-subtle">
-                <div className="flex justify-end sm:justify-between items-center h-20 px-6 md:px-margin-lg max-w-container-max mx-auto">
+                <div className="flex justify-end sm:justify-between items-center h-16 px-6 md:px-margin-lg max-w-container-max mx-auto">
                     <Link className="hidden sm:block text-headline-md font-headline-md font-bold text-on-surface" to="/">CreatorBoost.ai</Link>
-                    <div className="flex gap-4">
+                    <div className="flex items-center gap-4">
                         <Link to="/register" className="px-4 py-1.5 text-[13px] sm:px-6 sm:py-2 sm:font-label-md bg-primary text-on-primary rounded-xl glow-button transition-all active:scale-95 inline-block text-center flex items-center">Get Started</Link>
                     </div>
                 </div>
             </header>
 
-            <main className="flex-grow flex items-center justify-center px-margin-sm py-8">
+            <main className="flex-grow flex items-center justify-center px-margin-sm py-2 overflow-y-auto">
                 <div className="w-full max-w-[420px]">
                     {/* Login Card */}
-                    <div className="glass-card p-8 rounded-xl shadow-2xl flex flex-col gap-5">
+                    <div className="glass-card p-6 rounded-xl shadow-2xl flex flex-col gap-4">
                         {/* Branding & Title */}
                         <div className="text-center">
-                            <h1 className="text-headline-lg font-headline-lg text-on-surface mb-1">Welcome Back</h1>
-                            <p className="text-body-md font-body-md text-slate-gray">Fueling your creative workflow with AI.</p>
+                            <h1 className="text-[24px] font-semibold text-on-surface mb-1">Welcome Back</h1>
+                            <p className="text-[14px] text-slate-gray">Fueling your creative workflow with AI.</p>
                         </div>
                         
                         {/* Social Login */}
@@ -100,7 +100,7 @@ const Login = () => {
                             <div className="flex flex-col gap-1.5">
                                 <div className="flex justify-between items-center ml-1">
                                     <label className="text-label-sm font-label-sm text-slate-gray" htmlFor="password">Password</label>
-                                    <Link className="text-label-sm font-label-sm text-primary hover:underline" to="#">Forgot password?</Link>
+                                    <Link className="text-label-sm font-label-sm text-primary hover:underline hidden" to="#">Forgot password?</Link>
                                 </div>
                                 <div className="relative">
                                     <input 
@@ -140,8 +140,8 @@ const Login = () => {
             </main>
 
             {/* Footer */}
-            <footer className="w-full border-t border-border-subtle">
-                <div className="px-margin-lg py-margin-md max-w-container-max mx-auto flex flex-col md:flex-row justify-between items-center gap-gutter">
+            <footer className="w-full border-t border-border-subtle shrink-0">
+                <div className="px-margin-lg py-3 max-w-container-max mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
                     <div className="text-body-sm font-body-sm text-slate-gray">
                         © 2026 CreatorBoost.ai. Built for the next generation of creators.
                     </div>

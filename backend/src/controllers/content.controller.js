@@ -5,6 +5,14 @@ import { ApiResponse } from "../utils/ApiResponse.js";
 import { generateContentFromAI } from "../utils/ai.js";
 import fs from "fs";
 import Groq from "groq-sdk";
+import { toFile } from "groq-sdk";
+import { v2 as cloudinary } from "cloudinary";
+
+cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 
 
 const generateContent = asyncHandler(async (req, res) => {
@@ -48,19 +56,54 @@ const getHistory = asyncHandler(async (req, res) => {
     );
 });
 
-const generateFromVideo = asyncHandler(async (req, res) => {
-    const { videoTitle } = req.body;
+const getUploadSignature = asyncHandler(async (req, res) => {
+    const timestamp = Math.round(new Date().getTime() / 1000);
+    const folder = "creatorboost/temp_videos";
     
-    if (!req.file) {
-        throw new ApiError(400, "Video or audio file is required");
+    const signature = cloudinary.utils.api_sign_request(
+        {
+            timestamp: timestamp,
+            folder: folder
+        },
+        process.env.CLOUDINARY_API_SECRET
+    );
+
+    return res.status(200).json(
+        new ApiResponse(200, {
+            timestamp,
+            signature,
+            cloudName: process.env.CLOUDINARY_CLOUD_NAME,
+            apiKey: process.env.CLOUDINARY_API_KEY,
+            folder
+        }, "Signature generated successfully")
+    );
+});
+
+const generateFromVideo = asyncHandler(async (req, res) => {
+    const { videoTitle, secure_url, public_id } = req.body;
+    
+    if (!secure_url || !public_id) {
+        throw new ApiError(400, "Cloudinary secure_url and public_id are required");
     }
 
     try {
         const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
         
-        // 1. Send file to Groq Whisper for transcription
+        // 1. Fetch file directly from Cloudinary URL, extracting ONLY the audio layer
+        // by changing the extension to .mp3. This bypasses Groq's 25MB file size limit
+        // since audio is significantly smaller than the full 100MB video.
+        const audioUrl = secure_url.replace(/\.[^/.]+$/, ".mp3");
+        const videoResponse = await fetch(audioUrl);
+        if (!videoResponse.ok) {
+            throw new ApiError(500, "Failed to download audio stream from Cloudinary");
+        }
+
+        // Convert the fetch response to a file-like object for the Groq SDK
+        const fileForGroq = await toFile(videoResponse.body, "audio.mp3");
+
+        // 2. Send file to Groq Whisper for transcription
         const transcription = await groq.audio.transcriptions.create({
-            file: fs.createReadStream(req.file.path),
+            file: fileForGroq,
             model: "whisper-large-v3",
             response_format: "json", // Optional, defaults to json
             language: "en", // Optional, depending on use case
@@ -72,13 +115,13 @@ const generateFromVideo = asyncHandler(async (req, res) => {
             throw new ApiError(500, "Failed to extract transcript from the file");
         }
 
-        // 2. Feed the transcript to existing Llama 3 logic
+        // 3. Feed the transcript to existing Llama 3 logic
         const aiResponse = await generateContentFromAI(transcriptText);
 
-        // 3. Save to DB
+        // 4. Save to DB
         const content = await Content.create({
             userId: req.user._id,
-            videoTitle: videoTitle || req.file.originalname,
+            videoTitle: videoTitle || "Uploaded Video",
             transcript: transcriptText,
             generatedTitle: aiResponse.title || "",
             generatedDescription: aiResponse.description || "",
@@ -100,9 +143,14 @@ const generateFromVideo = asyncHandler(async (req, res) => {
         console.error("Error in generateFromVideo:", error);
         throw new ApiError(500, error.message || "Failed to process video and generate content");
     } finally {
-        // Always clean up the temporary uploaded file
-        if (req.file && req.file.path) {
-            fs.unlinkSync(req.file.path);
+        // Always completely wipe the video off Cloudinary space
+        if (public_id) {
+            try {
+                await cloudinary.uploader.destroy(public_id, { resource_type: 'video' });
+                console.log(`Successfully cleaned up video ${public_id} from Cloudinary.`);
+            } catch (cleanupError) {
+                console.error(`Failed to clean up video ${public_id} from Cloudinary:`, cleanupError);
+            }
         }
     }
 });
@@ -123,4 +171,4 @@ const deleteHistoryItem = asyncHandler(async (req, res) => {
     );
 });
 
-export { generateContent, getHistory, generateFromVideo, deleteHistoryItem };
+export { generateContent, getHistory, generateFromVideo, deleteHistoryItem, getUploadSignature };

@@ -22,15 +22,16 @@ api.interceptors.response.use(
     }
 );
 
-export const generateContentFromVideo = async (videoTitle, file) => {
-    const formData = new FormData();
-    if (videoTitle) formData.append('videoTitle', videoTitle);
-    formData.append('video', file);
+export const getUploadSignature = async () => {
+    const response = await api.get('/content/upload-signature');
+    return response.data;
+};
 
-    const response = await api.post('/content/generate/video', formData, {
-        headers: {
-            'Content-Type': 'multipart/form-data',
-        },
+export const generateContentFromVideo = async (videoTitle, secure_url, public_id) => {
+    const response = await api.post('/content/generate/video', {
+        videoTitle,
+        secure_url,
+        public_id
     });
     return response.data;
 };

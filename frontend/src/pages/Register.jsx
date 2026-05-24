@@ -28,22 +28,24 @@ const Register = () => {
     };
 
     return (
-        <div className="bg-background text-on-background font-body-md selection:bg-primary-container selection:text-on-primary-container min-h-screen flex flex-col">
+        <div className="bg-background text-on-background font-body-md selection:bg-primary-container selection:text-on-primary-container h-screen overflow-hidden flex flex-col">
             {/* Top Navigation */}
             <header className="sticky top-0 w-full z-50 backdrop-blur-xl border-b border-border-subtle bg-glass-bg">
-                <div className="flex justify-end sm:justify-between items-center px-6 md:px-margin-lg h-20 max-w-container-max mx-auto">
+                <div className="flex justify-end sm:justify-between items-center h-16 px-6 md:px-margin-lg max-w-container-max mx-auto">
                     <Link className="hidden sm:block font-headline-md text-headline-md font-bold text-primary" to="/">CreatorBoost.ai</Link>
-                    <Link to="/login" className="bg-primary text-on-primary text-[13px] px-4 py-1.5 sm:font-label-md sm:px-6 sm:py-2.5 rounded-xl hover:opacity-80 transition-opacity active:scale-95 duration-200 inline-block text-center">Login</Link>
+                    <div className="flex items-center gap-4">
+                        <Link to="/login" className="bg-primary text-on-primary text-[13px] px-4 py-1.5 sm:font-label-md sm:px-6 sm:py-2.5 rounded-xl hover:opacity-80 transition-opacity active:scale-95 duration-200 inline-block text-center">Login</Link>
+                    </div>
                 </div>
             </header>
 
             {/* Main Content: Sign Up Card */}
-            <main className="flex-grow flex items-center justify-center px-margin-sm py-4">
-                <div className="w-full max-w-[460px] glass-card rounded-xl p-6 flex flex-col gap-4">
+            <main className="flex-grow flex items-center justify-center px-margin-sm py-2 overflow-y-auto">
+                <div className="w-full max-w-[460px] glass-card rounded-xl p-6 flex flex-col gap-3">
                     {/* Header Section */}
                     <div className="text-center space-y-1">
-                        <h1 className="font-headline-lg text-[28px] leading-[36px] font-semibold text-on-surface">Create your account</h1>
-                        <p className="font-body-md text-[15px] text-slate-gray">Join thousands of creators boosting their content.</p>
+                        <h1 className="text-[24px] font-semibold text-on-surface">Create your account</h1>
+                        <p className="text-[14px] text-slate-gray">Join thousands of creators boosting their content.</p>
                     </div>
 
                     {/* Social Action */}
@@ -134,8 +136,8 @@ const Register = () => {
             </main>
 
             {/* Footer */}
-            <footer className="w-full py-margin-md border-t border-border-subtle bg-surface mt-auto">
-                <div className="flex flex-col md:flex-row justify-between items-center px-margin-lg max-w-container-max mx-auto gap-4">
+            <footer className="w-full py-3 border-t border-border-subtle bg-surface mt-auto shrink-0">
+                <div className="flex flex-col md:flex-row justify-between items-center px-margin-lg max-w-container-max mx-auto gap-2">
                     <div className="font-headline-sm text-headline-sm text-on-surface">CreatorBoost.ai</div>
                     <div className="flex gap-8">
                         <Link className="font-body-sm text-body-sm text-slate-gray hover:text-primary transition-colors" to="#">Privacy</Link>

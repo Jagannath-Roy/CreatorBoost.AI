@@ -64,7 +64,7 @@ const History = () => {
             <main className="flex-1 flex flex-col h-screen overflow-hidden bg-background">
                 <header className="flex items-center justify-between px-4 md:px-margin-lg h-16 border-b border-border-subtle bg-surface/80 backdrop-blur-md shrink-0">
                     <div className="flex items-center gap-8">
-                        <span className="font-headline-sm text-[18px] md:text-headline-sm text-on-surface">CreatorBoost.ai</span>
+                        <Link className="text-headline-md font-headline-md font-bold text-on-surface" to="/">CreatorBoost.ai</Link>
                         <nav className="hidden sm:flex items-center gap-6">
                             <Link to="/dashboard" className="font-label-md text-label-md text-slate-gray hover:text-on-surface transition-colors">Dashboard</Link>
                             <Link to="/history" className="font-label-md text-label-md text-primary font-bold transition-colors">History</Link>
@@ -85,7 +85,7 @@ const History = () => {
         <main className="flex-1 flex flex-col h-screen overflow-hidden bg-background">
             <header className="flex items-center justify-between px-4 md:px-margin-lg h-16 border-b border-border-subtle bg-surface/80 backdrop-blur-md shrink-0">
                 <div className="flex items-center gap-8">
-                    <span className="font-headline-sm text-[18px] md:text-headline-sm text-on-surface">CreatorBoost.ai</span>
+                    <Link className="text-headline-md font-headline-md font-bold text-on-surface" to="/">CreatorBoost.ai</Link>
                     <nav className="hidden sm:flex items-center gap-6">
                         <Link to="/dashboard" className="font-label-md text-label-md text-slate-gray hover:text-on-surface transition-colors">Dashboard</Link>
                         <Link to="/history" className="font-label-md text-label-md text-primary font-bold transition-colors">History</Link>
