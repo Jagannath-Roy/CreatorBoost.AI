@@ -37,11 +37,12 @@ const PublicRoute = ({ children }) => {
 
 function AppRoutes() {
   const location = useLocation();
-  const isLandingPage = location.pathname === '/';
+  const hideNavbarPaths = ['/', '/login', '/register'];
+  const shouldHideNavbar = hideNavbarPaths.includes(location.pathname);
 
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-900 font-sans transition-colors duration-200">
-      {!isLandingPage && <Navbar />}
+      {!shouldHideNavbar && <Navbar />}
       <main>
         <Routes>
           <Route 
