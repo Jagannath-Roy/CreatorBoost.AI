@@ -48,10 +48,10 @@ const Login = () => {
         >
             {/* TopNavBar */}
             <header className="sticky top-0 z-50 w-full bg-glass-bg backdrop-blur-md border-b border-border-subtle">
-                <div className="flex justify-between items-center h-20 px-margin-lg max-w-container-max mx-auto">
-                    <Link className="text-headline-md font-headline-md font-bold text-on-surface" to="/">CreatorBoost.ai</Link>
+                <div className="flex justify-end sm:justify-between items-center h-20 px-6 md:px-margin-lg max-w-container-max mx-auto">
+                    <Link className="hidden sm:block text-headline-md font-headline-md font-bold text-on-surface" to="/">CreatorBoost.ai</Link>
                     <div className="flex gap-4">
-                        <Link to="/register" className="px-6 py-2 bg-primary text-on-primary font-label-md rounded-xl glow-button transition-all active:scale-95 inline-block text-center flex items-center">Get Started</Link>
+                        <Link to="/register" className="px-4 py-1.5 text-[13px] sm:px-6 sm:py-2 sm:font-label-md bg-primary text-on-primary rounded-xl glow-button transition-all active:scale-95 inline-block text-center flex items-center">Get Started</Link>
                     </div>
                 </div>
             </header>

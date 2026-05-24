@@ -31,9 +31,9 @@ const Register = () => {
         <div className="bg-background text-on-background font-body-md selection:bg-primary-container selection:text-on-primary-container min-h-screen flex flex-col">
             {/* Top Navigation */}
             <header className="sticky top-0 w-full z-50 backdrop-blur-xl border-b border-border-subtle bg-glass-bg">
-                <div className="flex justify-between items-center px-margin-lg h-20 max-w-container-max mx-auto">
-                    <Link className="font-headline-md text-headline-md font-bold text-primary" to="/">CreatorBoost.ai</Link>
-                    <Link to="/login" className="bg-primary text-on-primary font-label-md px-6 py-2.5 rounded-xl hover:opacity-80 transition-opacity active:scale-95 duration-200 inline-block text-center">Login</Link>
+                <div className="flex justify-end sm:justify-between items-center px-6 md:px-margin-lg h-20 max-w-container-max mx-auto">
+                    <Link className="hidden sm:block font-headline-md text-headline-md font-bold text-primary" to="/">CreatorBoost.ai</Link>
+                    <Link to="/login" className="bg-primary text-on-primary text-[13px] px-4 py-1.5 sm:font-label-md sm:px-6 sm:py-2.5 rounded-xl hover:opacity-80 transition-opacity active:scale-95 duration-200 inline-block text-center">Login</Link>
                 </div>
             </header>
 
