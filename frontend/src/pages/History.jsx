@@ -180,6 +180,16 @@ const History = () => {
                                             </div>
                                         )}
 
+                                        {item.generatedTimestamps && (
+                                            <div className="bg-surface-container-low rounded-xl p-5 border border-border-subtle/50 relative group">
+                                                <div className="flex justify-between items-start mb-3">
+                                                    <span className="text-[12px] md:text-[14px] text-primary uppercase font-bold tracking-wider">Video Timestamps</span>
+                                                    <CopyButton text={item.generatedTimestamps} />
+                                                </div>
+                                                <p className="font-body-md text-[14px] text-on-surface whitespace-pre-line">{item.generatedTimestamps}</p>
+                                            </div>
+                                        )}
+
                                         {item.generatedCaption && (
                                             <div className="bg-surface-container-low rounded-xl p-5 border-l-4 border-l-secondary border-border-subtle/50 relative group">
                                                 <div className="flex justify-between items-start mb-3">

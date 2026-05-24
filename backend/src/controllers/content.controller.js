@@ -26,11 +26,17 @@ const generateContent = asyncHandler(async (req, res) => {
         generatedDescription: aiResponse.description || "",
         generatedCaption: aiResponse.caption || "",
         generatedHashtags: aiResponse.hashtags || "",
-        generatedSummary: Array.isArray(aiResponse.summary) ? aiResponse.summary.join("\n") : (aiResponse.summary || "")
+        generatedSummary: Array.isArray(aiResponse.summary) ? aiResponse.summary.join("\n") : (aiResponse.summary || ""),
+        generatedTimestamps: aiResponse.timestamps || ""
     });
 
+    const responseContent = {
+        ...content.toJSON(),
+        thumbnail: "coming_soon"
+    };
+
     return res.status(201).json(
-        new ApiResponse(201, content, "Content generated successfully")
+        new ApiResponse(201, responseContent, "Content generated successfully")
     );
 });
 
@@ -78,11 +84,17 @@ const generateFromVideo = asyncHandler(async (req, res) => {
             generatedDescription: aiResponse.description || "",
             generatedCaption: aiResponse.caption || "",
             generatedHashtags: aiResponse.hashtags || "",
-            generatedSummary: Array.isArray(aiResponse.summary) ? aiResponse.summary.join("\n") : (aiResponse.summary || "")
+            generatedSummary: Array.isArray(aiResponse.summary) ? aiResponse.summary.join("\n") : (aiResponse.summary || ""),
+            generatedTimestamps: aiResponse.timestamps || ""
         });
 
+        const responseContent = {
+            ...content.toJSON(),
+            thumbnail: "coming_soon"
+        };
+
         return res.status(201).json(
-            new ApiResponse(201, { content, transcript: transcriptText }, "Video processed and content generated successfully")
+            new ApiResponse(201, { content: responseContent, transcript: transcriptText }, "Video processed and content generated successfully")
         );
     } catch (error) {
         console.error("Error in generateFromVideo:", error);

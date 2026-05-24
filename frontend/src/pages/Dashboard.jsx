@@ -28,6 +28,7 @@ const EmptyResultsPlaceholder = () => {
         { label: 'Title', isSecondary: false },
         { label: 'Summary', isSecondary: false },
         { label: 'Full Description', isSecondary: false },
+        { label: 'Video Timestamps', isSecondary: false },
         { label: 'Short-Form Caption (TikTok/Reels/Shorts)', isSecondary: true },
         { label: 'Hashtags', isSecondary: false }
     ];
@@ -45,17 +46,43 @@ const EmptyResultsPlaceholder = () => {
                     </div>
                 </div>
             ))}
+            <LockedThumbnailCard />
         </div>
     );
 };
+
+const LockedThumbnailCard = () => (
+    <div className="glass-card rounded-xl p-6 relative border border-border-subtle/40 bg-surface-container-low/30 overflow-hidden">
+        {/* Clear Heading */}
+        <div className="flex justify-between items-start mb-4 relative z-20">
+            <span className="text-[12px] md:text-[14px] uppercase font-bold tracking-wider text-primary/80">Thumbnail</span>
+        </div>
+
+        {/* Dimmed background mock */}
+        <div className="opacity-20 blur-[2px] pointer-events-none select-none relative z-0">
+            <div className="h-32 bg-surface-container-high rounded-xl w-full flex items-center justify-center">
+                <span className="material-symbols-outlined text-5xl text-slate-gray">image</span>
+            </div>
+        </div>
+        
+        {/* Overlay lock */}
+        <div className="absolute inset-0 z-10 flex flex-col items-center justify-center bg-background/20 backdrop-blur-[1px] pt-8">
+             <span className="material-symbols-outlined text-4xl text-on-surface mb-3">lock</span>
+             <div className="inline-flex items-center px-4 py-1.5 bg-surface-container-highest text-on-surface font-label-sm rounded-full border border-border-subtle shadow-sm">
+                 To be rolled out soon
+             </div>
+        </div>
+    </div>
+);
 
 const LoadingResultsPlaceholder = () => {
     const fields = [
         { label: 'Video Title', isSecondary: false },
         { label: 'Video Summary', isSecondary: false },
         { label: 'Full Description', isSecondary: false },
-        { label: 'Short-Form Caption (TikTok/Reels)', isSecondary: true },
-        { label: 'Search Hashtags', isSecondary: false }
+        { label: 'Video Timestamps', isSecondary: false },
+        { label: 'Short-Form Caption (TikTok/Reels/Shorts)', isSecondary: true },
+        { label: 'Hashtags', isSecondary: false }
     ];
 
     return (
@@ -63,6 +90,7 @@ const LoadingResultsPlaceholder = () => {
             {fields.map((field, idx) => (
                 <SkeletonCard key={idx} label={field.label} isSecondary={field.isSecondary} />
             ))}
+            <LockedThumbnailCard />
         </div>
     );
 };
@@ -90,6 +118,7 @@ const StaggeredResults = ({ result }) => {
         { key: 'generatedTitle', label: 'Title', type: 'title' },
         { key: 'generatedSummary', label: 'Summary', type: 'summary' },
         { key: 'generatedDescription', label: 'Full Description', type: 'description' },
+        { key: 'generatedTimestamps', label: 'Video Timestamps', type: 'timestamps' },
         { key: 'generatedCaption', label: 'Short-Form Caption (TikTok/Reels/Shorts)', type: 'caption', isSecondary: true },
         { key: 'generatedHashtags', label: 'Hashtags', type: 'hashtags' }
     ];
@@ -118,9 +147,10 @@ const StaggeredResults = ({ result }) => {
             case 'description':
                 return <p className="font-body-sm text-body-sm text-on-surface leading-relaxed whitespace-pre-line">{content}</p>;
             case 'caption':
-                return <p className="font-body-md text-body-md text-on-surface italic whitespace-pre-line">{content}</p>;
+                return <p className="font-body-md text-on-surface italic whitespace-pre-line">{content}</p>;
             case 'hashtags':
-                return <p className="font-body-md text-body-md text-on-surface whitespace-pre-line">{content}</p>;
+            case 'timestamps':
+                return <p className="font-body-md text-on-surface whitespace-pre-line">{content}</p>;
             default:
                 return <p>{content}</p>;
         }
@@ -143,6 +173,7 @@ const StaggeredResults = ({ result }) => {
                     return <SkeletonCard key={`skeleton-${step.key}`} label={step.label} isSecondary={step.isSecondary} />;
                 }
             })}
+            <LockedThumbnailCard />
         </div>
     );
 };

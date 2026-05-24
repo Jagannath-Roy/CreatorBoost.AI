@@ -29,6 +29,9 @@ const contentSchema = new Schema(
         },
         generatedSummary: {
             type: String
+        },
+        generatedTimestamps: {
+            type: String
         }
     },
     {

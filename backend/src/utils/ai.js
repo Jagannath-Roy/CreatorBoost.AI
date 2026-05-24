@@ -13,6 +13,7 @@ const generateContentFromAI = async (transcript) => {
         3. A viral caption for short-form platforms (TikTok/Reels/Shorts).
         4. Relevant hashtags (space separated).
         5. A short summary of the main points (3-4 bullet points).
+        6. Suggested video timestamps/chapters (e.g., 0:00 Intro, 1:30 Main Topic) formatted as text.
 
         Return ONLY a raw JSON object with the following keys, with no extra text or markdown formatting outside of the JSON structure:
         {
@@ -20,7 +21,8 @@ const generateContentFromAI = async (transcript) => {
             "description": "",
             "caption": "",
             "hashtags": "",
-            "summary": ""
+            "summary": "",
+            "timestamps": ""
         }
 
         Transcript:
